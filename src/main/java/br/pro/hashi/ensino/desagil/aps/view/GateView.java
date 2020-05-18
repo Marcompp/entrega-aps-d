@@ -33,14 +33,14 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         super(180, 120);
 
         this.gate = gate;
-        this.light = new Light(255, 0, 0);
+        this.light = new Light(255, 0, 0, 0, 0, 0);
 
         int h = 2;
 
         //posição da luz
         lightx = 142;
         lighty = 50;
-        lightr = 25;
+        lightr = 26;
 
         inBox1 = new JCheckBox();
         inBox2 = new JCheckBox();
@@ -122,16 +122,20 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         int x = event.getX();
         int y = event.getY();
 
-        int dist = Math.abs(x - (lightx + 12)) + Math.abs(y - (lighty + 12));
+        double diam = lightr;
+        diam = diam / 2;
+
+        double dist = Math.sqrt((x - (lightx + diam)) * (x - (lightx + diam)) + (y - (lighty + diam)) * (y - (lighty + diam)));
         System.out.println(dist);
-        System.out.println("r" + lightr);
+        System.out.println("r" + diam);
 
 
         // Se o clique foi dentro do circulo colorido...
-        if (dist <= 16) {
+        if (dist <= diam) {
 
             // ...então abrimos a janela seletora de cor...
             light.setColor(JColorChooser.showDialog(this, null, Color.RED));
+
 
             // ...e chamamos repaint para atualizar a tela.
             repaint();
