@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class Light implements Receiver {
     private Color color;
-    private Color offcolor;
+    private Color offColor;
     private Emitter emitter;
 
     public Light(int r, int g, int b, int r2, int g2, int b2) {
         color = new Color(r, g, b);
-        offcolor = new Color(r2, g2, b2);
+        offColor = new Color(r2, g2, b2);
         emitter = null;
     }
 
@@ -17,14 +17,14 @@ public class Light implements Receiver {
         if (emitter != null && emitter.read()) {
             return color;
         }
-        return offcolor;
+        return offColor;
     }
 
     public void setColor(Color color) {
         if (emitter != null && emitter.read()) {
             this.color = color;
         } else {
-            this.offcolor = color;
+            this.offColor = color;
         }
     }
 
